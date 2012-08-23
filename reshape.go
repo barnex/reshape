@@ -23,7 +23,7 @@ func R3(array []float32, size [3]int) [][][]float32 {
 
 // Re-interpret a contiguous array as a multi-dimensional array of given size.
 // Underlying storage is shared.
-func R4(list []float32, size []int) [][][][]float32 {
+func R4(list []float32, size [4]int) [][][][]float32 {
 	sliced := make([][][][]float32, size[0])
 	for i := range sliced {
 		sliced[i] = make([][][]float32, size[1])
