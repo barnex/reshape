@@ -44,32 +44,6 @@ func R4(list []float32, size [4]int) [][][][]float32 {
 	return sliced
 }
 
-// Assuming the input has a block layout,
-// return its size.
-func SizeofR3(block [][][]float32) [3]int {
-	return [3]int{len(block), len(block[0]), len(block[0][0])}
-}
-
-// Assuming the input has a block layout,
-// return its size.
-func SizeofD3(block [][][]float64) [3]int {
-	return [3]int{len(block), len(block[0]), len(block[0][0])}
-}
-
-// Reshape the block to one contiguous list.
-// Assumes the block's storage is contiguous.
-func ContiguousR3(block [][][]float32) []float32 {
-	N := prod3(SizeofR3(block))
-	return block[0][0][:N]
-}
-
-// Reshape the block to one contiguous list.
-// Assumes the block's storage is contiguous.
-func ContiguousD3(block [][][]float64) []float64 {
-	N := prod3(SizeofD3(block))
-	return block[0][0][:N]
-}
-
 // Re-interpret a contiguous array as a multi-dimensional array of given size.
 // Underlying storage is shared.
 func D3(array []float64, size [3]int) [][][]float64 {
