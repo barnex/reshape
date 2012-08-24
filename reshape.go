@@ -7,7 +7,7 @@ import "fmt"
 func R3(array []float32, size [3]int) [][][]float32 {
 	Nx, Ny, Nz := size[0], size[1], size[2]
 	if Nx*Ny*Nz != len(array) {
-		panic(fmt.Errorf("reshape: size mismatch: %v*%v*%v != %v", Nx, Ny, Nz, len(array)))
+		panic(fmt.Errorf("reshape: size mismatch: %v != %v", size, len(array)))
 	}
 	sliced := make([][][]float32, Nx)
 	for i := range sliced {
@@ -23,7 +23,10 @@ func R3(array []float32, size [3]int) [][][]float32 {
 
 // Re-interpret a contiguous array as a multi-dimensional array of given size.
 // Underlying storage is shared.
-func R4(list []float32, size [4]int) [][][][]float32 {
+func R4(array []float32, size [4]int) [][][][]float32 {
+	if prod4(size) != len(array) {
+		panic(fmt.Errorf("reshape: size mismatch: %v != %v", size, len(array)))
+	}
 	sliced := make([][][][]float32, size[0])
 	for i := range sliced {
 		sliced[i] = make([][][]float32, size[1])
@@ -37,7 +40,7 @@ func R4(list []float32, size [4]int) [][][][]float32 {
 	for i := range sliced {
 		for j := range sliced[i] {
 			for k := range sliced[i][j] {
-				sliced[i][j][k] = list[((i*size[1]+j)*size[2]+k)*size[3]+0 : ((i*size[1]+j)*size[2]+k)*size[3]+size[3]]
+				sliced[i][j][k] = array[((i*size[1]+j)*size[2]+k)*size[3]+0 : ((i*size[1]+j)*size[2]+k)*size[3]+size[3]]
 			}
 		}
 	}
@@ -49,7 +52,7 @@ func R4(list []float32, size [4]int) [][][][]float32 {
 func D3(array []float64, size [3]int) [][][]float64 {
 	Nx, Ny, Nz := size[0], size[1], size[2]
 	if Nx*Ny*Nz != len(array) {
-		panic(fmt.Errorf("reshape: size mismatch: %v*%v*%v != %v", Nx, Ny, Nz, len(array)))
+		panic(fmt.Errorf("reshape: size mismatch: %v != %v", size, len(array)))
 	}
 	sliced := make([][][]float64, Nx)
 	for i := range sliced {
@@ -68,7 +71,7 @@ func D3(array []float64, size [3]int) [][][]float64 {
 func C3(array []complex64, size [3]int) [][][]complex64 {
 	Nx, Ny, Nz := size[0], size[1], size[2]
 	if Nx*Ny*Nz != len(array) {
-		panic(fmt.Errorf("reshape: size mismatch: %v*%v*%v != %v", Nx, Ny, Nz, len(array)))
+		panic(fmt.Errorf("reshape: size mismatch: %v != %v", size, len(array)))
 	}
 	sliced := make([][][]complex64, Nx)
 	for i := range sliced {
@@ -84,10 +87,10 @@ func C3(array []complex64, size [3]int) [][][]complex64 {
 
 // Re-interpret a contiguous array as a multi-dimensional array of given size.
 // Underlying storage is shared.
-func Z3(block []complex128, size [3]int) [][][]complex128 {
+func Z3(array []complex128, size [3]int) [][][]complex128 {
 	Nx, Ny, Nz := size[0], size[1], size[2]
-	if Nx*Ny*Nz != len(block) {
-		panic(fmt.Errorf("reshape: size mismatch: %v*%v*%v != %v", Nx, Ny, Nz, len(block)))
+	if Nx*Ny*Nz != len(array) {
+		panic(fmt.Errorf("reshape: size mismatch: %v != %v", size, len(array)))
 	}
 	sliced := make([][][]complex128, Nx)
 	for i := range sliced {
@@ -95,7 +98,7 @@ func Z3(block []complex128, size [3]int) [][][]complex128 {
 	}
 	for i := range sliced {
 		for j := range sliced[i] {
-			sliced[i][j] = block[(i*Ny+j)*Nz+0 : (i*Ny+j)*Nz+Nz]
+			sliced[i][j] = array[(i*Ny+j)*Nz+0 : (i*Ny+j)*Nz+Nz]
 		}
 	}
 	return sliced

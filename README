@@ -4,11 +4,9 @@ package reshape
     import "github.com/barnex/reshape"
 
     This package converts between 1D arrays (like []float32) and
-    mulit-dimensional arrays (like [][][]float32), while sharing underlying
-    storage.
-
-    Also allows to re-interpret arrays. E.g., cast a []complex128 as a
-    []float64 of twice the size.
+    mulit-dimensional arrays (like [][][]float32), sharing underlying
+    storage. Also allows to re-interpret arrays. E.g., cast a []complex128
+    as a []float64 of twice the size, sharing underlying storage.
 
     This is often needed when passing multi-dimensional arrays as contigous
     lists to, e.g., C code.
@@ -51,7 +49,7 @@ func R3(array []float32, size [3]int) [][][]float32
     Re-interpret a contiguous array as a multi-dimensional array of given
     size. Underlying storage is shared.
 
-func R4(list []float32, size [4]int) [][][][]float32
+func R4(array []float32, size [4]int) [][][][]float32
     Re-interpret a contiguous array as a multi-dimensional array of given
     size. Underlying storage is shared.
 
@@ -71,7 +69,7 @@ func SizeofR3(block [][][]float32) [3]int
 func SizeofR4(block [][][][]float32) [4]int
     Assuming the input has a block layout, return its size.
 
-func Z3(block []complex128, size [3]int) [][][]complex128
+func Z3(array []complex128, size [3]int) [][][]complex128
     Re-interpret a contiguous array as a multi-dimensional array of given
     size. Underlying storage is shared.
 
