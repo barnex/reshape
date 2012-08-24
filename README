@@ -55,7 +55,7 @@ func SizeofR3(block [][][]float32) [3]int
 func SizeofR4(block [][][][]float32) [4]int
     Assuming the input has a block layout, return its size.
 
-func Z3(array []complex128, size [3]int) [][][]complex128
+func Z3(block []complex128, size [3]int) [][][]complex128
     Re-interpret a contiguous array as a multi-dimensional array of given
     size. Underlying storage is shared.
 

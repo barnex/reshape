@@ -84,10 +84,10 @@ func C3(array []complex64, size [3]int) [][][]complex64 {
 
 // Re-interpret a contiguous array as a multi-dimensional array of given size.
 // Underlying storage is shared.
-func Z3(array []complex128, size [3]int) [][][]complex128 {
+func Z3(block []complex128, size [3]int) [][][]complex128 {
 	Nx, Ny, Nz := size[0], size[1], size[2]
-	if Nx*Ny*Nz != len(array) {
-		panic(fmt.Errorf("reshape: size mismatch: %v*%v*%v != %v", Nx, Ny, Nz, len(array)))
+	if Nx*Ny*Nz != len(block) {
+		panic(fmt.Errorf("reshape: size mismatch: %v*%v*%v != %v", Nx, Ny, Nz, len(block)))
 	}
 	sliced := make([][][]complex128, Nx)
 	for i := range sliced {
@@ -95,7 +95,7 @@ func Z3(array []complex128, size [3]int) [][][]complex128 {
 	}
 	for i := range sliced {
 		for j := range sliced[i] {
-			sliced[i][j] = array[(i*Ny+j)*Nz+0 : (i*Ny+j)*Nz+Nz]
+			sliced[i][j] = block[(i*Ny+j)*Nz+0 : (i*Ny+j)*Nz+Nz]
 		}
 	}
 	return sliced
