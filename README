@@ -1,0 +1,62 @@
+PACKAGE
+
+package reshape
+    import "github.com/barnex/reshape"
+
+    Converts between 1D arrays (like []float32) and mulit-dimensional arrays
+    (like [][][]float32), while sharing underlying storage.
+
+    This is often needed when passing multi-dimensional arrays as contigous
+    lists to, e.g., C code.
+
+FUNCTIONS
+
+func C3(array []complex64, size [3]int) [][][]complex64
+    Re-interpret a contiguous array as a multi-dimensional array of given
+    size. Underlying storage is shared.
+
+func ContiguousD3(block [][][]float64) []float64
+    Reshape the block to one contiguous list. Assumes the block's storage is
+    contiguous.
+
+func ContiguousD4(block [][][][]float64) []float64
+    Reshape the block to one contiguous list. Assumes the block's storage is
+    contiguous.
+
+func ContiguousR3(block [][][]float32) []float32
+    Reshape the block to one contiguous list. Assumes the block's storage is
+    contiguous.
+
+func ContiguousR4(block [][][][]float32) []float32
+    Reshape the block to one contiguous list. Assumes the block's storage is
+    contiguous.
+
+func D3(array []float64, size [3]int) [][][]float64
+    Re-interpret a contiguous array as a multi-dimensional array of given
+    size. Underlying storage is shared.
+
+func R3(array []float32, size [3]int) [][][]float32
+    Re-interpret a contiguous array as a multi-dimensional array of given
+    size. Underlying storage is shared.
+
+func R4(list []float32, size [4]int) [][][][]float32
+    Re-interpret a contiguous array as a multi-dimensional array of given
+    size. Underlying storage is shared.
+
+func SizeofD3(block [][][]float64) [3]int
+    Assuming the input has a block layout, return its size.
+
+func SizeofD4(block [][][][]float64) [4]int
+    Assuming the input has a block layout, return its size.
+
+func SizeofR3(block [][][]float32) [3]int
+    Assuming the input has a block layout, return its size.
+
+func SizeofR4(block [][][][]float32) [4]int
+    Assuming the input has a block layout, return its size.
+
+func Z3(array []complex128, size [3]int) [][][]complex128
+    Re-interpret a contiguous array as a multi-dimensional array of given
+    size. Underlying storage is shared.
+
+

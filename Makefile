@@ -1,4 +1,4 @@
-all: 6g 
+all: 6g doc
 
 6g:
 	go install -v
@@ -34,3 +34,6 @@ clean:
 opt:
 	go-optview -w *.go
 	gofmt -w *.go
+
+doc:
+	godoc github.com/barnex/reshape > README
